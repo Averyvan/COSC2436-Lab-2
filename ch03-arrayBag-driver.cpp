@@ -12,6 +12,7 @@ void displayBag(ArrayBag<ItemType>& bag)
 	cout << "The bag contains " << bag.getCurrentSize()
         << " items:" << endl;
    vector<ItemType> bagItems = bag.toVector();
+   sort(bagItems.begin(), bagItems.end());
    
    int numberOfEntries = (int) bagItems.size();
    for (int i = 0; i < numberOfEntries; i++)
@@ -25,20 +26,29 @@ int main()
 {
 	ArrayBag<int> bag;
 	ArrayBag<int> bag2;
-	for (int i=0; i<6;i++) bag.add(i);
-	for (int i=6; i<10;i++) bag2.add(i);
-	displayBag(bag);
-	displayBag(bag2);
+//	for (int i=0; i<6;i++) bag.add(i);
+//	for (int i=6; i<10;i++) bag2.add(i);
+//	displayBag(bag);
+//	displayBag(bag2);
 	ArrayBag<int> bag3 = bag.bagUnion(bag2);
-	displayBag(bag3);
-	bag.clear(); bag2.clear();
+//	displayBag(bag3);
+//	bag.clear(); bag2.clear();
+//	
+//	for (int i=0; i<6;i++) bag.add(i);
+//	for (int i=4; i<10;i++) bag2.add(i);
+//	displayBag(bag);
+//	displayBag(bag2);
+//	bag3 = bag2.bagIntersection(bag);
+//	displayBag(bag3);
+	bag.clear(); bag2.clear(); bag3.clear();
 	
 	for (int i=0; i<6;i++) bag.add(i);
 	for (int i=4; i<10;i++) bag2.add(i);
 	displayBag(bag);
 	displayBag(bag2);
-	bag3 = bag.bagIntersection(bag2);
+	bag3 = bag.bagDifference(bag2);
 	displayBag(bag3);
+	bag.clear(); bag2.clear();
 	
 	return 0;
 }	// end main

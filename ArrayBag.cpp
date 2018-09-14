@@ -165,14 +165,14 @@ ArrayBag<ItemType> ArrayBag<ItemType>::bagUnion(const ArrayBag& bagB) const
 	{
 		resultBag.add(bagB.items[i]);
 	}
-	sort(resultBag.items, resultBag.items+itemCount);
+	//sort(resultBag.items, resultBag.items+itemCount);
 	return resultBag;
 }
 
 /* Returns intersection of two bags
 	@pre	have two bag items
 	@post	Input bags are not changed
-			intersection of two bags sorted and returned
+			intersection of two bags returned
 	@param	bagB other object to be compared with parent
 	@return ArrayBag object containing intersection of two bags	*/
 template <class ItemType>
@@ -182,11 +182,11 @@ ArrayBag<ItemType> ArrayBag<ItemType>::bagIntersection(const ArrayBag& bagB) con
 	for (int i = 0; i < itemCount; i++)
 	{
 		int need;
-		int firstBagCopies = getFrequencyOf(i);
-		int secondBagCopies = bagB.getFrequencyOf(i);
+		int firstBagCopies = getFrequencyOf(items[i]);
+		int secondBagCopies = bagB.getFrequencyOf(items[i]);
 		if (firstBagCopies < secondBagCopies) need = firstBagCopies;
-		else need = secondBagCopies;
-		int have = resultBag.getFrequencyOf(i); //amount of i in resultBag
+		else need = secondBagCopies; //these two lines put need at the lower of the two
+		int have = resultBag.getFrequencyOf(items[i]); //amount of i in resultBag
 		for (int j = have; j < need; j++)
 		{
 			resultBag.add(items[i]);
@@ -195,5 +195,28 @@ ArrayBag<ItemType> ArrayBag<ItemType>::bagIntersection(const ArrayBag& bagB) con
 	return resultBag;
 }
 
-//ArrayBag ArrayBag<ItemType>::bagIntersection(const ArrayBag bagA, const ArrayBag bagB) const;
-//ArrayBag ArrayBag<ItemType>::bagDifference(const ArrayBag bagA, const ArrayBag bagB) const;
+/* Returns difference of two bags
+	@pre	have two bag items
+	@post	Input bags are not changed
+			difference of two bags returned
+	@param	bagB other object to be compared with parent
+	@return	ArrayBag object containing difference of two bags
+*/
+template <class ItemType>
+ArrayBag<ItemType> ArrayBag<ItemType>::bagDifference(const ArrayBag& bagB) const
+{
+	ArrayBag resultBag;
+	for (int i = 0; i< itemCount; i++) resultBag.add(items[i]);
+	for (int i = 0; i < resultBag.itemCount; i++)
+	{
+		int firstBagCopies = getFrequencyOf(resultBag.items[i]);
+		int secondBagCopies = bagB.getFrequencyOf(resultBag.items[i]);
+		int resultBagCopies = resultBag.getFrequencyOf(resultBag.items[i]);
+		if ((firstBagCopies - resultBagCopies) != secondBagCopies)
+		{
+			resultBag.remove(resultBag.items[i]);
+			i--;
+		}
+	}
+	return resultBag;
+}
