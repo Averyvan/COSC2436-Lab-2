@@ -34,9 +34,9 @@ public:
 	int getFrequencyOf(const ItemType& anEntry) const;
 	std::vector<ItemType> toVector() const;
 	//Advanced member functions
-	ArrayBag bagUnion(const ArrayBag bagB) const;
-	ArrayBag bagIntersection(const ArrayBag bagB) const;
-	ArrayBag bagDifference(const ArrayBag bagB) const;
+	ArrayBag bagUnion(const ArrayBag& bagB) const;
+	ArrayBag bagIntersection(const ArrayBag& bagB) const;
+	ArrayBag bagDifference(const ArrayBag& bagB) const;
 }; // end ArrayBag
 
 #include "ArrayBag.cpp"

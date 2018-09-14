@@ -7,6 +7,7 @@
 #include "ArrayBag.h"
 #include <cstddef>
 #include <algorithm> //for sort()
+using namespace std;
 
 template<class ItemType>
 ArrayBag<ItemType>::ArrayBag(): itemCount(0), maxItems(DEFAULT_CAPACITY)
@@ -148,22 +149,50 @@ int ArrayBag<ItemType>::getIndexOf(const ItemType& target) const
 //public Advanced Member Functions
 /* Returns union of two bags
 	@pre	Have two bag items
-	@post	Input bags are not changed, union of bags output
-	@param	bagA one object to be processed
-			bagB other object to be processed
-	@return	ArrayBag object containing union of two input bags
-*/
+	@post	Input bags are not changed
+			union of bags sorted and returned
+	@param	bagB other object to be added
+	@return	ArrayBag object containing union of two bags	*/
 template <class ItemType>
-ArrayBag<ItemType> ArrayBag<ItemType>::bagUnion(const ArrayBag bagB) const
+ArrayBag<ItemType> ArrayBag<ItemType>::bagUnion(const ArrayBag& bagB) const
 {
-	ArrayBag bagU; //empty bag to contain union
-	for (int i = 0; i < itemCount(); i++) {
-		bagU.add(items[i]);
+	ArrayBag resultBag; //empty bag to contain union
+	for (int i = 0; i < itemCount; i++)
+	{
+		resultBag.add(items[i]);
 	}
-	for (int i = 0; i < bagB.itemCount(); i++) {
-		bagU.add(bagB.items[i]);
+	for (int i = 0; i < bagB.itemCount; i++)
+	{
+		resultBag.add(bagB.items[i]);
 	}
-	std::sort(bagU);
+	sort(resultBag.items, resultBag.items+itemCount);
+	return resultBag;
+}
+
+/* Returns intersection of two bags
+	@pre	have two bag items
+	@post	Input bags are not changed
+			intersection of two bags sorted and returned
+	@param	bagB other object to be compared with parent
+	@return ArrayBag object containing intersection of two bags	*/
+template <class ItemType>
+ArrayBag<ItemType> ArrayBag<ItemType>::bagIntersection(const ArrayBag& bagB) const
+{
+	ArrayBag resultBag; //empty bag to contain intersection
+	for (int i = 0; i < itemCount; i++)
+	{
+		int need;
+		int firstBagCopies = getFrequencyOf(i);
+		int secondBagCopies = bagB.getFrequencyOf(i);
+		if (firstBagCopies < secondBagCopies) need = firstBagCopies;
+		else need = secondBagCopies;
+		int have = resultBag.getFrequencyOf(i); //amount of i in resultBag
+		for (int j = have; j < need; j++)
+		{
+			resultBag.add(items[i]);
+		}
+	}
+	return resultBag;
 }
 
 //ArrayBag ArrayBag<ItemType>::bagIntersection(const ArrayBag bagA, const ArrayBag bagB) const;
