@@ -22,33 +22,87 @@ void displayBag(ArrayBag<ItemType>& bag)
 	cout << endl << endl;
 }  // end displayBag
 
+template <class ItemType>
+void bagTest(ArrayBag<ItemType>& bagOne, ArrayBag<ItemType>& bagTwo)
+{
+	cout<<"\nUnion contains:\n";
+	ArrayBag<ItemType> bagResults = bagOne.bagUnion(bagTwo);
+	displayBag(bagResults);
+	bagResults = bagOne.bagIntersection(bagTwo);
+	displayBag(bagResults);
+	bagResults = bagOne.bagDifference(bagTwo);
+	cout<<"Clearing all bag contents...\n\n";
+	bagOne.clear(); bagTwo.clear(); bagResults.clear();
+}
+
 int main()
 {
-	ArrayBag<int> bag;
-	ArrayBag<int> bag2;
-//	for (int i=0; i<6;i++) bag.add(i);
-//	for (int i=6; i<10;i++) bag2.add(i);
-//	displayBag(bag);
-//	displayBag(bag2);
-	ArrayBag<int> bag3 = bag.bagUnion(bag2);
-//	displayBag(bag3);
-//	bag.clear(); bag2.clear();
-//	
-//	for (int i=0; i<6;i++) bag.add(i);
-//	for (int i=4; i<10;i++) bag2.add(i);
-//	displayBag(bag);
-//	displayBag(bag2);
-//	bag3 = bag2.bagIntersection(bag);
-//	displayBag(bag3);
-	bag.clear(); bag2.clear(); bag3.clear();
-	
-	for (int i=0; i<6;i++) bag.add(i);
-	for (int i=4; i<10;i++) bag2.add(i);
-	displayBag(bag);
-	displayBag(bag2);
-	bag3 = bag.bagDifference(bag2);
-	displayBag(bag3);
-	bag.clear(); bag2.clear();
+	cout<<"This program tests user defined type ArrayBags, and tests Union, Intersection, \
+and Difference method functions."<<endl;
+	ArrayBag<char> bagOne;
+	ArrayBag<char> bagTwo;
+	ArrayBag<char> bagResults;
+	string userInput;
+	while (true)
+	{
+		cout<<"1) Digit Char Array\n2) Alpha Char Array\n3)\
+ String Name Array\n4) Integer Array\n5) Exit\n";
+		cout<<"Please enter your choice: ";
+		string choice;
+		cin>>choice;
+		if (choice == "1")
+		{
+			int numItems = 0;
+			while (!(cout<<"How many items for the first bag? (Between 0 and 12): ")||
+			!(cin>>numItems) || numItems > 12 || numItems < 0)
+			{
+				cout<<"Error: Please enter a valid number between 0 and 12.\n";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			}
+			cin.clear();
+			for (int i = 0; i < numItems; i++)
+			{
+				userInput = "";
+				cout<<"Enter a single integer character: ";
+				cin>>userInput;
+				if (userInput.length() != 1 || !isdigit(userInput[0]))
+				{
+					cout<<"Error: Invalid input.\n";
+					i--;
+				}
+				else
+				{
+					bagOne.add(userInput[0]);
+				}
+			}
+			numItems = 0;
+			while (!(cout<<"How many items for the second bag? (Between 0 and 12): ")||
+			!(cin>>numItems) || numItems > 12 || numItems < 0)
+			{
+				cout<<"Error: Please enter a valid number between 0 and 12.\n";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(),'\n');
+			}
+			for (int i = 0; i < numItems; i++)
+			{
+				userInput = "";
+				cout<<"Enter a single integer character: ";
+				cin>>userInput;
+				if (userInput.length() != 1 || !isdigit(userInput[0]))
+				{
+					cout<<"Error: Invalid input.\n";
+					i--;
+				}
+				else bagTwo.add(userInput[0]);
+			}
+			bagTest(bagOne, bagTwo);
+		}
+		else
+		{
+			cout<<"Invalid input. Please enter 1-5 to select an option.";
+		}
+	}
 	
 	return 0;
 }	// end main
