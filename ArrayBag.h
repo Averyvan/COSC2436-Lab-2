@@ -1,5 +1,9 @@
-//  Created by Frank M. Carrano and Timothy M. Henry.
-//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+// Author: Avery VanAusdal
+// Assignment Number: Lab 2
+// File Name: ArrayBag.h
+// Course/Section: COSC 1337 Section 3
+// Date: 9/16/2018
+// Instructor: Bernard Ku
 
 /** Header file for an array-based implementation of the ADT bag.
  @file ArrayBag.h */
