@@ -31,10 +31,10 @@ int getIntInput(string prompt)
 	int numItems = 0;
 	while (!(cout<< prompt)||
 	!(cin>>numItems) || numItems > 12 || numItems < 0)
-	{
+	{ //loops until valid input is captured
 		cout<<"Error: Please enter a valid number between 0 and 12.\n";
 		cin.clear(); //Error clearing
-		cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		cin.ignore(numeric_limits<streamsize>::max(),'\n'); //Clears any leftover in cin stream
 	}
 	return numItems; //Returns number of items to be added
 } //end getIntInput
@@ -44,13 +44,13 @@ void bagTest(ArrayBag<ItemType>& bagOne, ArrayBag<ItemType>& bagTwo)
 { //Runs bags through all new member functions, bagUnion, bagIntersection, and bagDifference.
 	cout<<"\nUnion contains:\n";
 	ArrayBag<ItemType> bagResults = bagOne.bagUnion(bagTwo);
-	displayBag(bagResults);
+	displayBag(bagResults); //display Union of bags
 	cout<<"\nIntersection contains:\n";
 	bagResults = bagOne.bagIntersection(bagTwo);
-	displayBag(bagResults);
+	displayBag(bagResults); //display Intersection of bags
 	cout<<"\nDifference contains:\n";
 	bagResults = bagOne.bagDifference(bagTwo);
-	displayBag(bagResults);
+	displayBag(bagResults); //display Difference of bags
 	cout<<"Clearing all bag contents...\n\n";
 	bagOne.clear(); bagTwo.clear(); bagResults.clear(); //Clears bags
 } //end bagTest
@@ -72,7 +72,7 @@ and Difference method functions."<<endl;
  String Name Array\n4) Integer Array\n5) Exit\n\n";
 		cout<<"Please enter your choice: ";
 		string choice;
-		cin>>choice;
+		cin>>choice; //picking a menu option
 		cout<<endl;
 		if (choice == "1") //Digit Char Array option
 		{
