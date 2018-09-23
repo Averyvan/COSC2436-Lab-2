@@ -55,6 +55,23 @@ void bagTest(ArrayBag<ItemType>& bagOne, ArrayBag<ItemType>& bagTwo)
 	bagOne.clear(); bagTwo.clear(); bagResults.clear(); //Clears bags
 } //end bagTest
 
+template <class ItemType>
+void getBagInputDigit(ArrayBag<ItemType>& bag, int numItems)
+{
+	for (int i = 0; i < numItems; i++) //loops through user desired number of times
+	{
+		string userInput = "";
+		cout<<" Enter a single integer character: ";
+		cin>>userInput;
+		if (userInput.length() != 1 || !isdigit(userInput[0]))
+		{
+			cout<<"  Error: Invalid input.\n";
+			i--; //takes the counter back one, to redo the item
+		}
+		else bag.add(userInput[0]);
+	}
+}
+
 int main()
 {
 	cout<<"This program tests user defined type ArrayBags, and tests Union, Intersection, \
@@ -76,32 +93,9 @@ and Difference method functions."<<endl;
 		cout<<endl;
 		if (choice == "1") //Digit Char Array option
 		{
-			int numItems = getIntInput("How many items for the first bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter a single integer character: ";
-				cin>>userInput;
-				if (userInput.length() != 1 || !isdigit(userInput[0]))
-				{
-					cout<<"  Error: Invalid input.\n";
-					i--; //takes the counter back one, to redo the item
-				}
-				else bagOne.add(userInput[0]);
-			}
-			numItems = getIntInput("How many items for the second bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter a single integer character: ";
-				cin>>userInput;
-				if (userInput.length() != 1 || !isdigit(userInput[0]))
-				{
-					cout<<"  Error: Invalid input.\n";
-					i--; //takes the counter back one, to redo the item
-				}
-				else bagTwo.add(userInput[0]);
-			}
+			getBagInputDigit(bagOne, getIntInput("How many items for the first bag? (Between 0 and 12): "));
+			getBagInputDigit(bagTwo, getIntInput("How many items for the second bag? (Between 0 and 12): "));
+			//retrieves user input for # of items, then asks # many times for bag input for both bags
 			bagTest(bagOne, bagTwo);
 		}
 		else if (choice == "2") //Alpha Char Array option
