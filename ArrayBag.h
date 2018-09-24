@@ -41,6 +41,8 @@ public:
 	ArrayBag bagUnion(const ArrayBag& bagB) const;
 	ArrayBag bagIntersection(const ArrayBag& bagB) const;
 	ArrayBag bagDifference(const ArrayBag& bagB) const;
+	
+	ArrayBag bagUnionBonus(const ArrayBag& bagB) const;
 }; // end ArrayBag
 
 #include "ArrayBag.cpp"

@@ -45,12 +45,19 @@ void bagTest(ArrayBag<ItemType>& bagOne, ArrayBag<ItemType>& bagTwo)
 	cout<<"\nUnion contains:\n";
 	ArrayBag<ItemType> bagResults = bagOne.bagUnion(bagTwo);
 	displayBag(bagResults); //display Union of bags
+	
+	cout<<"\nBonus Union contains:\n";
+	bagResults = bagOne.bagUnionBonus(bagTwo);
+	displayBag(bagResults); //display Bonus Union of bags
+	
 	cout<<"\nIntersection contains:\n";
 	bagResults = bagOne.bagIntersection(bagTwo);
 	displayBag(bagResults); //display Intersection of bags
+	
 	cout<<"\nDifference contains:\n";
 	bagResults = bagOne.bagDifference(bagTwo);
 	displayBag(bagResults); //display Difference of bags
+	
 	cout<<"Clearing all bag contents...\n\n";
 	bagOne.clear(); bagTwo.clear(); bagResults.clear(); //Clears bags
 } //end bagTest

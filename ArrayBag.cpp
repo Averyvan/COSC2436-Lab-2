@@ -224,3 +224,26 @@ ArrayBag<ItemType> ArrayBag<ItemType>::bagDifference(const ArrayBag& bagB) const
 	}
 	return resultBag;
 }
+
+/* Returns union of two bags with no duplicates
+	@pre	Have two bag items
+	@post	Input bags are not changed
+			union of bags sorted and returned
+	@param	bagB other object to be added
+	@return	ArrayBag object containing union of two bags	*/
+template <class ItemType>
+ArrayBag<ItemType> ArrayBag<ItemType>::bagUnionBonus(const ArrayBag& bagB) const
+{
+	ArrayBag resultBag; //empty bag to contain union
+	for (int i = 0; i < itemCount; i++)
+	{
+		if (!resultBag.contains(items[i])) resultBag.add(items[i]);
+	} //checks if resultBag already has items
+	for (int i = 0; i < bagB.itemCount; i++)
+	{
+		if (!resultBag.contains(bagB.items[i])) resultBag.add(bagB.items[i]);
+	}
+	//sort(resultBag.items, resultBag.items+itemCount);
+	return resultBag;
+}
+
