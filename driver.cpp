@@ -72,6 +72,57 @@ void getBagInputDigit(ArrayBag<ItemType>& bag, int numItems)
 	}
 }
 
+template <class ItemType>
+void getBagInputAlpha(ArrayBag<ItemType>& bag, int numItems)
+{
+	for (int i = 0; i < numItems; i++) //loops through user desired number of times
+	{
+		userInput = "";
+		cout<<" Enter a single letter character: ";
+		cin>>userInput;
+		if (userInput.length() != 1 || !isalpha(userInput[0]))
+		{
+			cout<<"  Error: Invalid input.\n";
+			i--; //takes the counter back one, to redo the item
+		}
+		else bag.add(userInput[0]);
+	}
+}
+
+template <class ItemType>
+void getBagInputString(ArrayBag<ItemType>& bag, int numItems)
+{
+	for (int i = 0; i < numItems; i++) //loops through user desired number of times
+	{
+		userInput = "";
+		cout<<" Enter a string: ";
+		cin>>userInput;
+		bag.add(userInput); 
+	} //adds user defined strings as many times as needed
+}
+
+template <class ItemType>
+void getBagInputInteger(ArrayBag<ItemType>& bag, int numItems)
+{
+	bool isDigit = true;
+	for (int i = 0; i < numItems; i++) //loops through user desired number of times
+	{
+		userInput = "";
+		cout<<" Enter an integer: ";
+		cin>>userInput;
+		for (int i = 0; i < userInput.length(); i++)
+		{ //Checks if any character in userInput is NOT a digit
+			if (!isdigit(userInput[i])) isDigit = false;
+		}
+		if (!isDigit)
+		{ //if it's not a digit, retry.
+			cout<<"  Error: Invalid input.\n";
+			i--; //takes the counter back one, to redo the item
+		}
+		else bagOneInt.add(stoi(userInput)); //stoi means String to Int
+	}
+}
+
 int main()
 {
 	cout<<"This program tests user defined type ArrayBags, and tests Union, Intersection, \
@@ -100,91 +151,20 @@ and Difference method functions."<<endl;
 		}
 		else if (choice == "2") //Alpha Char Array option
 		{
-			int numItems = getIntInput("How many items for the first bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter a single letter character: ";
-				cin>>userInput;
-				if (userInput.length() != 1 || !isalpha(userInput[0]))
-				{
-					cout<<"  Error: Invalid input.\n";
-					i--; //takes the counter back one, to redo the item
-				}
-				else bagOne.add(userInput[0]);
-			}
-			numItems = getIntInput("How many items for the second bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter a single letter character: ";
-				cin>>userInput;
-				if (userInput.length() != 1 || !isalpha(userInput[0]))
-				{
-					cout<<"  Error: Invalid input.\n";
-					i--; //takes the counter back one, to redo the item
-				}
-				else bagTwo.add(userInput[0]);
-			}
+			getBagInputAlpha(bagOne, getIntInput("How many items for the first bag? (Between 0 and 12): "));
+			getBagInputAlpha(bagTwo, getIntInput("How many items for the second bag? (Between 0 and 12): "));
 			bagTest(bagOne, bagTwo);
 		}
 		else if (choice == "3") //String Array option
 		{
-			int numItems = getIntInput("How many items for the first bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter a string: ";
-				cin>>userInput;
-				bagOneString.add(userInput);
-			}
-			numItems = getIntInput("How many items for the second bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++)
-			{
-				userInput = "";
-				cout<<" Enter a string: ";
-				cin>>userInput;
-				bagTwoString.add(userInput);
-			}
+			getBagInputString(bagOneString, getIntInput("How many items for the first bag? (Between 0 and 12): "));
+			getBagInputString(bagTwoString, getIntInput("How many items for the second bag? (Between 0 and 12): "));
 			bagTest(bagOneString, bagTwoString);
 		}
 		else if (choice == "4") //Integer Array option
 		{
-			bool isDigit = true;
-			int numItems = getIntInput("How many items for the first bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter an integer: ";
-				cin>>userInput;
-				for (int i = 0; i < userInput.length(); i++)
-				{ //Checks if any character in userInput is NOT a digit
-					if (!isdigit(userInput[i])) isDigit = false;
-				}
-				if (!isDigit)
-				{ //if it's not a digit, retry.
-					cout<<"  Error: Invalid input.\n";
-					i--; //takes the counter back one, to redo the item
-				}
-				else bagOneInt.add(stoi(userInput)); //stoi means String to Int
-			}
-			numItems = getIntInput("How many items for the second bag? (Between 0 and 12): ");
-			for (int i = 0; i < numItems; i++) //loops through user desired number of times
-			{
-				userInput = "";
-				cout<<" Enter an integer: ";
-				cin>>userInput;
-				for (int i = 0; i < userInput.length(); i++)
-				{
-					if (!isdigit(userInput[i])) isDigit = false;
-				}
-				if (!isDigit)
-				{
-					cout<<"  Error: Invalid input.\n";
-					i--;
-				}
-				else bagTwoInt.add(stoi(userInput));
-			}
+			getBagInputInteger(bagOneInt, getIntInput("How many items for the first bag? (Between 0 and 12): "));
+			getBagInputInteger(bagTwoInt, getIntInput("How many items for the second bag? (Between 0 and 12): "));
 			bagTest(bagOneInt, bagTwoInt);
 		}
 		else if (choice == "5")
