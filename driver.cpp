@@ -57,7 +57,7 @@ void bagTest(ArrayBag<ItemType>& bagOne, ArrayBag<ItemType>& bagTwo)
 
 template <class ItemType>
 void getBagInputDigit(ArrayBag<ItemType>& bag, int numItems)
-{
+{ //retrieves user input numItems times and checks for valid input
 	for (int i = 0; i < numItems; i++) //loops through user desired number of times
 	{
 		string userInput = "";
@@ -68,16 +68,16 @@ void getBagInputDigit(ArrayBag<ItemType>& bag, int numItems)
 			cout<<"  Error: Invalid input.\n";
 			i--; //takes the counter back one, to redo the item
 		}
-		else bag.add(userInput[0]);
+		else bag.add(userInput[0]); //adds user 
 	}
-}
+} //end getBagInputDigit
 
 template <class ItemType>
 void getBagInputAlpha(ArrayBag<ItemType>& bag, int numItems)
-{
+{ //retrieves user input numItems times and checks for valid input
 	for (int i = 0; i < numItems; i++) //loops through user desired number of times
 	{
-		userInput = "";
+		string userInput = "";
 		cout<<" Enter a single letter character: ";
 		cin>>userInput;
 		if (userInput.length() != 1 || !isalpha(userInput[0]))
@@ -87,27 +87,27 @@ void getBagInputAlpha(ArrayBag<ItemType>& bag, int numItems)
 		}
 		else bag.add(userInput[0]);
 	}
-}
+} //end getBagInputAlpha
 
 template <class ItemType>
 void getBagInputString(ArrayBag<ItemType>& bag, int numItems)
-{
+{ //retrieves user input numItems times and checks for valid input
 	for (int i = 0; i < numItems; i++) //loops through user desired number of times
 	{
-		userInput = "";
+		string userInput = "";
 		cout<<" Enter a string: ";
 		cin>>userInput;
 		bag.add(userInput); 
 	} //adds user defined strings as many times as needed
-}
+} //end getBagInputString
 
 template <class ItemType>
 void getBagInputInteger(ArrayBag<ItemType>& bag, int numItems)
-{
+{ //retrieves user input numItems times and checks for valid input
 	bool isDigit = true;
 	for (int i = 0; i < numItems; i++) //loops through user desired number of times
 	{
-		userInput = "";
+		string userInput = "";
 		cout<<" Enter an integer: ";
 		cin>>userInput;
 		for (int i = 0; i < userInput.length(); i++)
@@ -119,9 +119,9 @@ void getBagInputInteger(ArrayBag<ItemType>& bag, int numItems)
 			cout<<"  Error: Invalid input.\n";
 			i--; //takes the counter back one, to redo the item
 		}
-		else bagOneInt.add(stoi(userInput)); //stoi means String to Int
+		else bag.add(stoi(userInput)); //stoi means String to Int
 	}
-}
+} //end getBagInputInteger
 
 int main()
 {
@@ -181,31 +181,149 @@ and Difference method functions."<<endl;
 	return 0;
 }	// end main
 
-/*
- Testing the Array-Based Bag:
- The initial bag is empty.
- isEmpty: returns 1; should be 1 (true)
- The bag contains 0 items:
- 
- 
- Add 6 items to the bag:
- The bag contains 6 items:
- one two three four five one
- 
- isEmpty: returns 0; should be 0 (false)
- getCurrentSize: returns 6; should be 6
- Try to add another entry: add("extra") returns 0
- contains("three"): returns 1; should be 1 (true)
- contains("ten"): returns 0; should be 0 (false)
- getFrequencyOf("one"): returns 2 should be 2
- remove("one"): returns 1; should be 1 (true)
- getFrequencyOf("one"): returns 1 should be 1
- remove("one"): returns 1; should be 1 (true)
- remove("one"): returns 0; should be 0 (false)
- 
- The bag contains 4 items:
- five two three four
- 
- After clearing the bag, isEmpty: returns 1; should be 1 (true)
- All done!
+/* Sample output:
+This program tests user defined type ArrayBags, and tests Union, Intersection, and Difference method functions.
+1) Digit Char Array
+2) Alpha Char Array
+3) String Name Array
+4) Integer Array
+5) Exit
+
+Please enter your choice: 1
+
+How many items for the first bag? (Between 0 and 12): 1
+ Enter a single integer character: 2
+How many items for the second bag? (Between 0 and 12): 3
+ Enter a single integer character: 1
+ Enter a single integer character: 2
+ Enter a single integer character: 3
+
+Union contains:
+The bag contains 4 items:
+1 2 2 3
+
+
+Intersection contains:
+The bag contains 1 items:
+2
+
+
+Difference contains:
+The bag contains 0 items:
+
+
+Clearing all bag contents...
+
+1) Digit Char Array
+2) Alpha Char Array
+3) String Name Array
+4) Integer Array
+5) Exit
+
+Please enter your choice: 2
+
+How many items for the first bag? (Between 0 and 12): 2
+ Enter a single letter character: a
+ Enter a single letter character: l
+How many items for the second bag? (Between 0 and 12): 5
+ Enter a single letter character: a
+ Enter a single letter character: t
+ Enter a single letter character: x
+ Enter a single letter character: y
+ Enter a single letter character: o
+
+Union contains:
+The bag contains 7 items:
+a a l o t x y
+
+
+Intersection contains:
+The bag contains 1 items:
+a
+
+
+Difference contains:
+The bag contains 1 items:
+l
+
+Clearing all bag contents...
+
+1) Digit Char Array
+2) Alpha Char Array
+3) String Name Array
+4) Integer Array
+5) Exit
+
+Please enter your choice: 3
+
+How many items for the first bag? (Between 0 and 12): John
+Error: Please enter a valid number between 0 and 12.
+How many items for the first bag? (Between 0 and 12): 1
+ Enter a string: John
+How many items for the second bag? (Between 0 and 12): 3
+ Enter a string: Todd
+ Enter a string: Mary
+ Enter a string: John
+
+Union contains:
+The bag contains 4 items:
+John John Mary Todd
+
+
+Intersection contains:
+The bag contains 1 items:
+John
+
+
+Difference contains:
+The bag contains 0 items:
+
+
+Clearing all bag contents...
+
+1) Digit Char Array
+2) Alpha Char Array
+3) String Name Array
+4) Integer Array
+5) Exit
+
+Please enter your choice: 4
+
+How many items for the first bag? (Between 0 and 12): 2
+ Enter an integer: 4
+ Enter an integer: 6
+How many items for the second bag? (Between 0 and 12): 4
+ Enter an integer: 6
+ Enter an integer: 2
+ Enter an integer: 1
+ Enter an integer: 1
+
+Union contains:
+The bag contains 6 items:
+1 1 2 4 6 6
+
+
+Intersection contains:
+The bag contains 1 items:
+6
+
+
+Difference contains:
+The bag contains 1 items:
+4
+
+Clearing all bag contents...
+
+1) Digit Char Array
+2) Alpha Char Array
+3) String Name Array
+4) Integer Array
+5) Exit
+
+Please enter your choice: 5
+
+Thank you, goodbye!
+--------------------------------
+Process exited after 86.75 seconds with return value 0
+Press any key to continue . . .
  */
