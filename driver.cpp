@@ -1,7 +1,7 @@
 // Author: Avery VanAusdal
 // Assignment Number: Lab 2
-// File Name: Driver.cpp
-// Course/Section: COSC 1337 Section 3
+// File Name: driver.cpp
+// Course/Section: COSC 2436 Section 3
 // Date: 9/16/2018
 // Instructor: Bernard Ku
 
